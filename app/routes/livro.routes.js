@@ -1,29 +1,28 @@
-const livros = require("../controller/livro.controller");
+const livrosController = require("../controller/livro.controller");
 module.exports = app => {
-    const livros = require("../controller/livro.controller")
 
     var router = require("express").Router()
 
     //criar
-    router.post("/", livros.create)
+    router.post("/", livrosController.create)
 
     //recuperar todos
-    router.get("/", livros.findAll)
+    router.get("/", livrosController.findAll)
 
     //recuperar por publicacao
-    router.get("/publicado", livros.findAllPublicados)
+    router.get("/publicado", livrosController.findAllPublicados)
 
     //recuperar por id
-    router.get("/:id", livros.findOne)
+    router.get("/:id", livrosController.findOne)
 
     //update por id
-    router.put("/:id", livros.update)
+    router.put("/:id", livrosController.update)
 
     //deletar por id
-    router.delete("/:id", livros.delete)
+    router.delete("/:id", livrosController.delete)
 
     //deletar todos
-    router.delete("/", livros.deleteAll)
+    router.delete("/", livrosController.deleteAll)
 
     app.use("/api/livros", router)
 

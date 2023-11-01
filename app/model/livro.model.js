@@ -14,7 +14,6 @@ module.exports = mongoose => {
         return object
     })
 
-    const  Livro = mongoose.model("livro", schema)
-    return Livro
+    return mongoose.model("livro", schema)
 }
 

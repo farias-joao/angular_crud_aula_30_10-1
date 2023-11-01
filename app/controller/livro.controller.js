@@ -28,18 +28,20 @@ exports.create = (req, res) => {
 
 }
 
-//recuperar
-exports.findAll = (req,res) => {
-    const titulo = req.body.titulo
-    var condicao = titulo ? {titulo: {$regex: new RegExp(titulo), $options:"i"}} : {}
-    Livro.find(condicao).then(data =>{
-        res.send(data)
+
+// Recuperar todos os livros
+exports.findAll = (req, res) => {
+    const titulo = req.query.titulo;
+    var condicao = titulo ? { titulo: { $regex: new RegExp(titulo, 'i') } } : {};
+    Livro.find(condicao).then(data => {
+        res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Erro ao recuperar livro."
-        })
-    })
-}
+            message: err.message || "Erro ao recuperar os livros."
+        });
+    });
+};
+
 
 //recuperar por ID
 exports.findOne = (req, res) => {
@@ -107,11 +109,22 @@ exports.deleteAll = (req, res) => {
         })
     }).catch(err => {
         res.status(500).send({
-            message: err.message ||
+            message: err.message || "Erro ao deletar livros."
         })
     })
 }
 
-exports. findAllPublicados = (req,res) => {
-    Livro.find({publicado: true})
-}
+// exports. findAllPublicados = (req,res) => {
+//     Livro.find({publicado: true})
+// }
+
+// Recuperar todos os livros publicados
+exports.findAllPublicados = (req, res) => {
+    Livro.find({ publicado: true }).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Erro ao recuperar livros publicados."
+        });
+    });
+};
